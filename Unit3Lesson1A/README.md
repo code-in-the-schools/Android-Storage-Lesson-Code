@@ -11,6 +11,7 @@
         private final String COLOR_KEY = "COLOR";
 
 3. Inside the method `protected void onCreate(Bundle savedInstanceState) {` add the following:
+        
         //initialize the shared preferences
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
         //Read initial value
@@ -32,6 +33,7 @@
         }
 
 4. Inside the `public void selectColor(View view) {` method, add the following just above the line containing `//Switch based on  which button was pressed`:
+        
         //Created SharedPreferences editor object
         SharedPreferences.Editor preferencesEditor = mPreferences.edit();
 
