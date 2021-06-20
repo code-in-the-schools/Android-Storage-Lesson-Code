@@ -1,4 +1,4 @@
-# Solution Steps:
+# Steps:
 
 1. Import SharedPreferences class in MainActivity.java:
 

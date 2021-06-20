@@ -1,4 +1,4 @@
-# Solution Steps:
+# Steps:
 
 1. First we are going to create a function that will a create a file for us with some sample output.
 

@@ -1,4 +1,4 @@
-# Completion Steps:
+# Steps:
 
 ## Unit 3 Lesson3 Activity 2
 
