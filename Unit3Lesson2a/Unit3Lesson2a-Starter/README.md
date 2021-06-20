@@ -1,14 +1,22 @@
-# Steps:
+![Code In The Schools Logo](https://static1.squarespace.com/static/5880dd4dd482e9da5c3bf1ea/t/588247a81e5b6c7358563ed0/1623673519694/?format=600w)
+
+## Code In The Schools Presents...
+
+# File Storage:
 
 1. First we are going to create a function that will a create a file for us with some sample output.
 
 2. After the method `protected void onCreate(Bundle savedInstanceState)` create a new method:
+
+    ```java
+    protected void createFile() throws IOException {
                 
-        protected void createFile() throws IOException {
-                
-        }
+    }
+    ```
+
 3. Within this method add the following code, taking time to understand each section:
 
+    ```java
         //This creates an empty file in our app's file storage named myfile.txt
         FileOutputStream fOut = openFileOutput("myfile.txt", Context.MODE_PRIVATE);
 
@@ -21,14 +29,18 @@
 
         //This ends the connection to the file and closes the connection to it
         fOut.close();
+    ```
 
 4. Now, add another method:
 
+    ```java
         protected void readFile() throws IOException {
         }
+    ```
 
 5. Within this method add the following code, taking time to understand each section:
 
+    ```java
         //This open a file named "myfile.txt" for input
         FileInputStream fin = openFileInput("myfile.txt");
 
@@ -45,9 +57,11 @@
         Log.d("",temp);
         //Close our connection to the file
         fin.close();
+    ```
 
 6. Finally, go up to the top and find the `protected void onCreate(Bundle savedInstanceState) {` method, inside of that method add the code below that calls our two methods. Don't worry about the JSONException piece, that is used in the future.
 
+    ```java
         try {
             //Create a file in local storage
             createFile();
@@ -56,6 +70,7 @@
         } catch (IOException) {
              e.printStackTrace();
         }
+     ```
 
 7. Run the application and monitor the Debug Console for the contents of the file to be shown.
 
@@ -67,12 +82,15 @@
 
 11. Go back to MainActivity.java and create a new method:
 
+    ```java
         protected String readAsset(String filename) throws IOException {
 
         }
+    ```
 
 12. Within this method add the following code, taking time to understand each section:
 
+    ```java
         //This function reads a file located in the assets folder
         //and returns the string contents of that file.
         
@@ -99,34 +117,44 @@
         
         //Return the result
         return result;
+    ```
 
 13. Just after the line that reads `readFile();` in the `protected void onCreate(Bundle savedInstanceState) {` method, add the following line:
+
+    ```java
         String assetContents = readAsset("addressbook.json");
         Log.d("",assetContents);
+    ```
 
 14. Again, run the app and take time to make sure the addressbook.json contents are being output to the Debug Console.
 
 15. Create a class variable by adding the following lines after the line that reads `public class MainActivity extends AppCompatActivity {`:
- 
+
+     ```java
         //This ArrayList will hold our key/value pairs for each of our
         //contacts
         ArrayList<HashMap<String, String>> contactList;
+     ```
 
 16. Within the method `protected void onCreate(Bundle savedInstanceState) {`, find the line that reads `setContentView(R.layout.activity_main);` and add the following below it:
 
+    ```java
         contactList = new ArrayList<>();
+    ```
 
+17. Create a new method:
 
-16. Create a new method:
-        
+    ```java
         //This function takes in a string containing JSON and adds 
         // each contact to our contactList
         protected void processJSON(String jsonString) throws JSONException {
 
         }
+    ```
 
-17. Within this method add the following code, taking time to understand each section:
+18. Within this method add the following code, taking time to understand each section:
 
+    ```java
         //Gets the top level object of our string
         //and processes the rest of the tree
         JSONObject root = new JSONObject(jsonString);
@@ -160,22 +188,31 @@
             // add contact to contact list
             contactList.add(newContact);
         }
+     ```
 
-18. Add the following line just below the line that reads: `Log.d("",assetContents);`, it should be around line number 39ish:
+19. Add the following line just below the line that reads: `Log.d("",assetContents);`, it should be around line number 39ish:
 
+    ```java
         processJSON(assetContents);
+    ```
 
-19. You will also need to replace this line 
-        
+20. You will also need to replace this line 
+
+    ```java
         } catch (IOException e) {
+    ```
+
     with this: 
-        
+
+    ```java
         } catch (IOException | JSONException e) {
+    ```
 
-20. At this point we have all of our contacts from the JSON file into an array and we are ready to start displaying them in the text view.
+21. At this point we have all of our contacts from the JSON file into an array and we are ready to start displaying them in the text view.
 
-21. Find the function `public void showContact(View view){` and delete this line: `txtVwContactInfo.setText("This is a test");` and add the following, making sure to understand each section of code:
-        
+22. Find the function `public void showContact(View view){` and delete this line: `txtVwContactInfo.setText("This is a test");` and add the following, making sure to understand each section of code:
+
+    ```java
         //Get a contact using the random index
         HashMap<String, String> randomContact = contactList.get(index);
 
@@ -187,21 +224,30 @@
         
         //Set the textView to use our new string
         txtVwContactInfo.setText(contactMessage);
+    ```
 
-22. You can run the app now and you should see the text updating in the textview with a message using a random contact's info. Because there are only a few samples in the addressbook.json file, you may see the same result back-to-back making things not feel very random. One fix to this would be to save the most recent contact's index and then generate a random index until it is different from the most recent index. Let's try that now...
+23. You can run the app now and you should see the text updating in the textview with a message using a random contact's info. Because there are only a few samples in the addressbook.json file, you may see the same result back-to-back making things not feel very random. One fix to this would be to save the most recent contact's index and then generate a random index until it is different from the most recent index. Let's try that now...
 
-23. After the line that reads `ArrayList<HashMap<String, String>> contactList;` add a new variable to track the most recent random contact: `int currentContactIndex = 0;`
+24. After the line that reads `ArrayList<HashMap<String, String>> contactList;` add a new variable to track the most recent random contact: 
 
-24. Now, find the line that reads `int index = (int)(Math.random() * contactList.size());` and add the following:
+    ```java
+        `int currentContactIndex = 0;`
+    ```
 
+25. Now, find the line that reads `int index = (int)(Math.random() * contactList.size());` and add the following:
+
+    ```java
         //Make sure we don't get the same number back-to-back
         while(index == currentContactIndex){
             index = (int)(Math.random() * contactList.size());
         }
+    ```
 
-25. And finally, we need to save the new currentContactIndex, so below the line that reads `txtVwContactInfo.setText(contactMessage);`, add:
+26. And finally, we need to save the new currentContactIndex, so below the line that reads `txtVwContactInfo.setText(contactMessage);`, add:
 
+    ```java
         //Set the currentContactIndex to our random number so we don't get it again
         currentContactIndex = index;
+    ```
 
-26. Run the app. You should get a new contact everytime you press the button now.
+27. Run the app. You should get a new contact everytime you press the button now.
