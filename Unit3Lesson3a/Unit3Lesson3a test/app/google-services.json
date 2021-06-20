@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "75932231691",
+    "project_id": "unit3lesson3a",
+    "storage_bucket": "unit3lesson3a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75932231691:android:55625fcdb1da798d21ff0e",
+        "android_client_info": {
+          "package_name": "org.codeintheschools.unit3lesson3a"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75932231691-fpt9qf9o03evkabsncusoqsf3ihm021u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdsAu61uRs5Dzppckbe0th7s_wGyt3d_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75932231691-fpt9qf9o03evkabsncusoqsf3ihm021u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
