@@ -2,18 +2,43 @@
 
 ## Unit 3 Lesson3 Activity 2
 
-1. Follow <https://firebase.google.com/docs/android/setup?authuser=0#console> to setup Firebase for the application. Make sure to reference notes in Lesson Guide.
-2. Copy google-services.json into folder Unit3Lesson3a/app/
+1. Follow the guide [Add Firebase using the Firebase console](https://firebase.google.com/docs/android/setup?authuser=0#console) to setup Firebase for the application. A few notes:
 
-## Unit 3 Lesson3 Activity 3
+    - Under “Step 1: Create a Firebase Project”, step 4 of “Create a Firebase project” mentions using Google Analytic. This is optional and not needed for any of the work we will do in this curriculum.
+    - Under “Step 2: Register your app with Firebase”, step 3 asks for the **Android package name**, students should use the following package name when using the sample project in this lesson:
+	`org.codeintheschools.unit3lesson3a`
+    - Under “Step 3: Add a Firebase configuration file”, step 1, you need to ensure students change their view in Android Studio to the Projects view. Then they can drag and drop the google-services.json from their downloads folder into the apps folder.
 
-1. First we will do a quick test to make sure everything is working.
-2. Open the MainActivity class and add the following import statement (line 7 is a fine place to add it):
+        ![Project View Screenshot](../images/image2.png)
+
+        ![Google Services.json](../images/image4.png)
+    - Under “Step 3: Add a Firebase configuration file”, step 2 is completed for you in the sample project but it is important for students to find those lines and understand they have been added for them. They will NOT be added for them in future projects.
+    - Similar to “Step 3: Add a Firebase configuration file”, step 2 … “Step 4: Add Firebase SDKs to your app” has been completed for you in the sample project but will not be there in future projects.
+2. Students should confirm their app still builds but no new functionality should be noticeable yet.
+3. We are now ready to move forward and begin working with Firebase Realtime Database in our project.
+
+
+## Unit 3 Lesson 3 Activity 3
+
+1. Navigate to the Realtime Database section of the [Firebase Console](https://console.firebase.google.com/project/_/database?authuser=0) and click the “Create Database” button.
+2. Choose the geographic location for your Realtime Database, the default is most likely a fine choice, and click Next. With a high usage app, we would want to choose a region where most of our users will be. For now, we can use the default choice or change it to a region closest to you.
+    ![Choosing a Firebase Region](../images/image3.png)
+3. For Security rules, take time to review the two options but we are going to Start in test mode, and click “Enable”
+    ![Choosing Firebase Security](../images/image12.png)
+4. After clicking Enable, our database has been created and is ready for use and you will be taken to the Realtime Database “Data” view. This view will eventually allow us to see and update data in your database.
+5. Ensure students have returned their view in Android Studio to the Android view:
+    ![Switch to Android View](../images/image7.png)
+6. Under Gradle Scripts section of the explorer, open the build.grade (Module: Unit3Lesson3a.app) file.
+    ![build.gradle file](../images/image1.png)
+7. Lines 38-42 load the Firebase platform and Realtime Database library. These have been added for convenience but students will need to know this step for their own projects. The directions provided in the Realtime Database [Installation & Setup on Android](https://firebase.google.com/docs/database/android/start?authuser=0) walk through these steps very clearly so students are encouraged to keep that page handy as a reference document.
+    ![build.gradle file](../images/image8.png)
+8. Now, we will do a quick test to make sure everything is working.
+9. Open the MainActivity class and add the following import statement (line 7 is a fine place to add it):
 
     ```java
     import com.google.firebase.database.*;
 
-3. Insert the following code after `super.onCreate(savedInstanceState);`, about line 32:
+10. Insert the following code after `super.onCreate(savedInstanceState);`, about line 32:
 
     ```java
     //Makes a connection to the database
@@ -25,9 +50,10 @@
     //Writes a value at our
     myRef.setValue("Hello, World!");
 
-4. Now run the app. You won't notice any difference when the app runs but if you check the Realtime Database Data view in the [Firebase Console](https://console.firebase.google.com/project/_/database?authuser=0), you should see a key/value pair of "message"/"Hello, World!".
+11. Now run the app. You won't notice any difference when the app runs but if you check the Realtime Database Data view in the [Firebase Console](https://console.firebase.google.com/project/_/database?authuser=0), you should see a key/value pair of "message"/"Hello, World!".
+    ![Hello World](../images/image11.png)
 
-5. After confirming this worked, remove lines you added in Step 3 in preparation for the next activity.
+12. After confirming this worked, remove lines you added in Step 3 in preparation for the next activity.
 
 ## Unit 3 Lesson3 Activity 4
 
@@ -176,7 +202,9 @@
 
 20. Check the Realtime Database Data view in the [Firebase Console](https://console.firebase.google.com/project/_/database?authuser=0), you should see an entry named customers, with a child object with a randomly generated key and then if you look beneath that, you should see your new customer.
 
-21. Notice how you can edit the customer directly in the Realtime Database Data view. The Realtime Database Data view is very powerful and makes it easy to view and update data. This is commonly referred to as making changes "on the backend" versus in-app. 
+21. Notice how you can edit the customer directly in the Realtime Database Data view by clicking on any of the fields. The Realtime Database Data view is very powerful and makes it easy to view and update data. This is commonly referred to as making changes "on the backend" versus in-app. 
+
+    ![Realtime Database Console](../images/image6.png)
 
 ## Unit 3 Lesson 3 Activity 5
 
@@ -240,6 +268,7 @@
     ```
 
 9. Run the application in debug mode and use the logcat tool to see the log results. Set the logcat filter to `Debug`, `onDataChange` and you should see the customers in your database.
+    ![logcat](../images/image10.png)
 
 10. Instead of logging the customers, let's get them added to our array. Replace the line (or comment it out) `Log.d("onDataChange()", "New Customer: " + myCustomer.name);` with the following:
 
